@@ -15,11 +15,17 @@ public class App {
         var request = HttpRequest.newBuilder(endereco).GET().build();
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         String body = response.body();
-        System.out.println(body);
 
         // extrair somente os dados que serão utilizados (pôster, titulo e classificação)
-        var parser = new JsonParser();
+        var parser = new JsonParser(); 
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
+
         // exibir e manipular os dados
+        for (Map<String,String> filme : listaDeFilmes)  {
+            System.out.println(filme.get("title"));
+            System.out.println(filme.get("image"));
+            System.out.println(filme.get("imDbRating"));
+            System.out.println();
+        }
     }
 }
